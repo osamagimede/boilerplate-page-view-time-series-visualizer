@@ -39,8 +39,10 @@ class BarPlotTestCase(unittest.TestCase):
 
     def test_bar_plot_legend_labels(self):
         actual = []
-        for label in self.ax.get_legend().get_texts():
-          actual.append(label.get_text())
+        legend= self.ax.get_legend()
+        if legend is not None:
+            for label in legend.get_texts():
+                actual.append(label.get_text())
         expected = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         self.assertEqual(actual, expected, "Expected bar plot legend labels to be months of the year.")
     
