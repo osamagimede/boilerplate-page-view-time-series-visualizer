@@ -45,20 +45,21 @@ def draw_bar_plot():
     df_bar = pd.DataFrame(df_bar.groupby(["year", "month"], sort=False)["value"].mean().round().astype(int))
     df_bar = df_bar.reset_index()
     missing_data = {
-        "Years": [2016, 2016, 2016, 2016],
-        "Months": ['January', 'February', 'March', 'April'],
-        "Average Page Views": [0, 0, 0, 0]
+        "year": [2016, 2016, 2016, 2016],
+        "month": ['January', 'February', 'March', 'April'],
+        "value": [0, 0, 0, 0]
     }
 
     df_bar = pd.concat([pd.DataFrame(missing_data), df_bar])
     #df_bar = df_bar.pivot_table(index="year", columns="month", values='value',aggfunc="mean")
     print(df_bar.head()) 
     # Draw bar plot
-
+    month_order=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     fig, ax= plt.subplots(figsize=(19.2, 10.8), dpi=100)
-    chart = sns.barplot(data=df_bar, x="Years", y="value", hue="Months", palette="tab10")
+    chart = sns.barplot(data=df_bar, x="year", y="value", hue_order=month_order, hue="month", palette="tab10")
     chart.set_xticklabels(chart.get_xticklabels(), rotation=90, horizontalalignment='center')
     ax.set_ylabel("Average Page Views")
+    ax.set_xlabel("Years")
   
         
     
